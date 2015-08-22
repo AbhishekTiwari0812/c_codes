@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+
+
+int main(){
+
+int central;
+int temp1,temp2,temp3,temp4;
+cin>>central>>temp1>>temp2>>temp3>>temp4;
+while(flag==1){
+
+
+}
+
+}
