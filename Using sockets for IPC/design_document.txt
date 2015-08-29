@@ -1,0 +1,57 @@
+--------Network-------
+Network initializes the graph.And prints out the current routers and end nodes available.
+(provided by the input text file "NetworkInput.txt".)
+
+-------Router-----------
+Router is started by terminal.
+It takes a unique(to routers) router_id in command line argument.
+Router gets access to whole graph first.(and other necessary initializations)
+Router then sets up a socket to listen to the requests.
+And waits for any message.
+now if router gets any message->
+	if message is broadcast type,
+		it first checks if the message received is already in the history table
+		using the message id (unique.),if yes then it just ignores the message.(TO AVOID CYCLES IN THE GRAPH)
+		else,it finds all its neighbours and sends the messages to those neighbours.
+	else if message is of unicast type,
+		it looks up at its end node neighbour list to see if the recipient end node 
+		is one of them.if yes,it forwards the message to that end node.
+		if no,it finds the the shortest path to the router whose neighbour end node could be the recipient and forwards to that router(SHORTEST PATH USING DIJKSTRA,TAKES THE COST OF EDGES IN CONSIDERATION TOO!)
+	else if message is of control type
+		the router just prints the count of messages it has received till now,and 
+		does every thing else pretty much same as it does when the message is broadcast type
+
+---------End Node------------
+End node is also started by terminal.
+Takes in  unique end node id from command line.
+Then it sets up a new port at which it starts listening.
+when end node gets any message-->
+	messages to the end node can be only of UNICAST type.
+	First,the end node finds if the message is sent from test client or the router(using coming from field in the message structure)	
+	If it's from any router then it means that the message was targeted for this node.
+	It simply prints the message it got.
+	If the messge is from test client then it simply forwards the messsage to its parent router 
+	and lets him handle the dirty work.
+
+--------------test_client---------
+Takes input from user
+and forwards the message to the end node/router mentioned in the input by the user.
+
+------------message_encode_decode-------
+Since sending structures through sockets can cause errors,we must encode/decode messages.
+code_message() converts the message structure to a byte stream (or in easier words ,string)
+decode_message() converts byte stream to message structure.
+
+-------------Graph.c--------------
+Handles the graph related nasty works...!
+
+
+-------socket_open_read_write.c-------
+As the name suggests,it contains the socket functions.
+to handle Read write open operations on specified port number. 
+
+----------Socket_list.txt--------
+(OF NO USE IN THE CODE)
+contains the list of opened sockets 
+11111 is used as delimeter.
+
