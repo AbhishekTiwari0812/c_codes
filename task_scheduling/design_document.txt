@@ -1,0 +1,36 @@
+The file queue.c contains only the functions related with the priority queue e.g extract_max() insert_in_queue()  max_heapify().
+logic ->
+main driver create a priority queue,which inserts nodes at fix positions after analyzing the priority of the task.
+function do_the_dance() extracts some of the tasks(this number is 20 in my code) which have higher prioirty and puts them into a ready queue.
+now work_on_it() which depicts a CPU takes the most preferred task from this ready queue comparing the TOTAL COST of the tasks(as suggested in the 
+assignment) in that queue and starts executing it for a certain period.
+If the task gets completed within the time,all is well.Next task comes to the CPU from the ready queue.
+Else if the task is going to take a lot of time,some part of it gets executed and it is then "preempted" from the CPU and gets back to the Priority 
+queue (note that the  prioirty of this task has been changed.)
+This process keeps getting repeated till each and every task is done i.e. there's no task in the priority queue or the ready queue.
+Priority queue gives preference to those tasks which have higher average cost.
+Ready queue gives preference to those which have higher total cost.
+And CPU keeps preempting the tasks which take longer time to execute.
+In this way,no task has to wait for a long time to be executed no matter how big or small it is.
+And due to priority,response time for each of the process is almost equal.
+This ensures starvation free mechanism.
+
+CODING--->
+first I initialize the values of resources and tasks to be completed.
+Number of resources is 100 by default.
+Number of tasks to be completed is 10 by default.The queue size is 10000 so the number of tasks to complete can be increased upto 10000
+fill_task_requirement() set_size_and_priority_of_tasks() and fill_values_for_resources() fill random values to the tasks and resource parameters.
+main driver then fills the priority queue with the tasks to be executed.
+do_the_dance() starts the actual part of the code.
+It first extracts certain number of tasks from the priority queue and puts them in the ready queue.
+work_on_it() depicts the CPU.
+It takes the preferred task (the task which has total higher cost is preferred to others )from the ready queue and starts executing.
+If task is finished,then work_on_it() takes next task otherwise it updates the task information (such that how much part of it is still to be 
+executed and which resources should be freed.Done in update_value() function ) and then do_the_dance() sets the priority of the unfinished task
+(using set_size_and_priority_of_tasks() and puts it back in the priority queue.
+This gets repeated till the priority queue and ready queue are completely empty.
+
+
+
+
+
