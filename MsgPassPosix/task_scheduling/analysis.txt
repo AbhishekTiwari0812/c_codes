@@ -1,0 +1,11 @@
+Given algorithm is better than round robin because round robin doesn't assign any priority to a job.
+It keeps on doing the tasks for a certain quatum of time which maybe not be a good idea for certain type of tasks.
+It is clear that sometimes  user/machine wants to execute one task faster than other and it can suffer a delay for other types.
+Round robin treats all tasks at equal priority.
+
+The given algorithm is better than shortes remaining time first (SRTF) too.Because in case of SRTF  tasks which have very long turn around time get starved!
+Whereas ,the given algorithm works in such a way that even the long tasks have good response time.
+FCFS can not support multiprogramming paradigm..! For the next process to execute,the current process has to finish which leads to process starvation.
+And response time will also be very big even for the small processes.
+
+So, in comparison, most of the times, on parallel programming supported systems, the given algorithm would better than the other 3 (round robin ,SRTF and FCFS )
